@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+<script>
+  //栈结构的常用方法：1.2.3.4.5.6.
+
+  function Stark() {
+    this.arr = []
+    //进栈
+    Stark.prototype.push = function(num) {
+      return this.arr.push(num)
+    }
+    //出栈
+    Stark.prototype.pop = function() {
+      return this.arr.pop()
+    }
+    //返回栈顶元素
+    Stark.prototype.peek = function() {
+      return this.arr[this.arr.length - 1]
+    }
+    //返回栈的长度
+    Stark.prototype.size = function() {
+      return this.arr.length
+    }
+    //判断栈是否为空
+    Stark.prototype.isEmpty = function() {
+      return this.arr.length === 0
+    }
+
+    Stark.prototype.toString = function() {
+      var str = ''
+      for(var i = 0; i < this.arr.length; i++){
+        str += this.arr[i] + ' '
+      }
+      return str
+    }
+  }
+
+  var stark = new Stark()
+
+  stark.push(111)
+  stark.push(222)
+  stark.push(132)
+  stark.push(321)
+  console.log(stark.toString())
+  console.log(stark.peek())
+</script>
+</html>
