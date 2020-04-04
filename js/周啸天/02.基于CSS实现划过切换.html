@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    *{
+      padding: 0;
+      margin: 0;
+    }
+    #shopping{
+      margin: 20px auto;
+      width: 300px;
+    }
+    #shop{
+      width: 200px;
+      background-color: yellowgreen;
+    }
+    #shopping:hover #content{
+      display: block;
+    }
+    #content{
+      height: 100px;
+      background-color: skyblue;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="shopping">
+    <div id="shop">购物车</div>
+    <p id="content">购物车的详细内容</p>
+  </div>
+</body>
+</html>
