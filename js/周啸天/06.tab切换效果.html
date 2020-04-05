@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    *{
+      padding: 0;
+      margin: 0;
+    }
+    #box{
+      width: 500px;
+      margin: 0px auto;
+    }
+
+    #container{
+      display: flex;
+      list-style: none;
+    }
+    #container li{
+      box-sizing: border-box;
+      height: 30px;
+      width: 50px;
+      border: lightslategray solid 1px;
+      margin-right: 10px;
+      position: relative;
+      top: 1px;
+    }
+    #box>div{
+      box-sizing: border-box;
+      width: 300px;
+      height: 130px;
+      border: lightslategray solid 1px;
+      display: none;
+    }
+    #box>div.active{
+      display: block;
+    }
+    #container li.active{
+      border-bottom: #fff 1px solid;
+    }
+  </style>
+</head>
+<body>
+  <div id="box">
+    <ul id="container">
+      <li class="active">标题1</li>
+      <li>标题2</li>
+      <li>标题3</li>
+    </ul>
+    <div class="active">内容1</div>
+    <div>内容2</div>
+    <div>内容3</div>
+  </div>
+</body>
+<script>
+  let liList = document.getElementsByTagName('li')
+  let divList = document.querySelectorAll('#box>div')
+
+  //方法一
+  // for(let i = 0; i < liList.length; i++){
+  //   liList[i].addEventListener('click', function() {
+  //     if(this.className === 'active'){
+  //       return
+  //     }else{
+  //       for(let i = 0; i < liList.length; i++) {
+  //         liList[i].className = ''
+  //         divList[i].className = ''
+  //       }
+  //       this.className = 'active'
+  //       divList[i].className = 'active'
+  //     }
+  //   })
+  // }
+  //方法二
+  // let index = 0
+  // for(let i = 0; i < liList.length; i++){
+  //   liList[i].addEventListener('click', function() {
+  //     if(i !== index){
+  //       liList[index].style.borderBottom = 'lightslategray solid 1px'
+  //       divList[index].style.display = 'none';
+  //       liList[i].style.borderBottom = '#fff solid 1px'
+  //       divList[i].style.display = 'block';
+  //       index = i
+  //     }
+  //   })
+  // }
+  //方法三 闭包1
+  // for(var i = 0; i < liList.length; i++){
+  //   (function(i){
+  //     var index = i
+  //     liList[index].addEventListener('click', function() {
+  //       if(this.className === 'active'){
+  //         return
+  //       }else{
+  //         for(var i = 0; i < liList.length; i++) {
+  //           liList[i].className = ''
+  //           divList[i].className = ''
+  //         }
+  //         liList[index].className = 'active'
+  //         divList[index].className = 'active'
+  //       }
+  //     })
+  //   })(i) 
+  // }
+  //方法四 闭包2
+  for(var i = 0; i < liList.length; i++){
+    liList[i].onclick = (function(i){
+      return function() {
+        if(this.className === 'active'){
+          return
+        }else{
+          for(var j = 0; j < liList.length; j++) {
+            liList[j].className = ''
+            divList[j].className = ''
+          }
+          liList[i].className = 'active'
+          divList[i].className = 'active'
+        }
+      }
+    })(i)
+  }
+
+</script>
+</html>

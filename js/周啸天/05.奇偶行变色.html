@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #container{
+      box-sizing: border-box;
+      width: 300px;
+      margin: 20px auto;
+      border: solid 1px lightblue;
+      list-style: none;
+      padding: 20px;
+    }
+    #container li{
+      height: 30px;
+      border-bottom: 1px dotted lightcoral;
+    }
+    #container li:nth-last-child(1) {
+      border-bottom: none;
+    }
+    /* #container li:nth-child(even) {
+      background-color: lightgreen;
+    }
+    #container li:hover{
+      background-color: lightpink;
+    } */
+  </style>
+</head>
+<body>
+  <ul id="container">
+    <li>第1个LI</li>
+    <li>第2个LI</li>
+    <li>第3个LI</li>
+    <li>第4个LI</li>
+    <li>第5个LI</li>
+  </ul>
+</body>
+<script>
+  let liList = document.getElementsByTagName('li')
+
+  for(let i = 0; i < liList.length; i++){
+    var color = []
+    if(i % 2){
+      liList[i].style.backgroundColor = 'lightgreen'
+    }
+    liList[i].addEventListener('mouseover', function() {
+      color[i] = getComputedStyle(this, null).backgroundColor
+      this.style.backgroundColor = 'lightpink'
+    })
+
+    liList[i].addEventListener('mouseout', function() {
+      if(color[i]){
+        this.style.backgroundColor = color[i]
+      }else{
+        this.style.backgroundColor = '#fff'
+      }
+    })
+  }
+</script>
+
+</html>
