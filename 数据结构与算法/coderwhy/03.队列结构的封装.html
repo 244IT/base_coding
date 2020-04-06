@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+<script>
+  function Queen() {
+    this.arr = []
+
+    Queen.prototype.push = function(num) {
+      return this.arr.push(num)
+    }
+    Queen.prototype.shift = function() {
+      return this.arr.shift()
+    }
+    Queen.prototype.size = function() {
+      return this.arr.length
+    }
+    Queen.prototype.isEmpty = function() {
+      return this.arr.length === 0
+    }
+    Queen.prototype.front = function() {
+      return this.arr[0]
+    }
+    Queen.prototype.toString = function() {
+      let str = ''
+      for(let i = 0; i < this.arr.length; i++){
+        str += this.arr[i] + ' '
+      }
+      return str
+    }
+  }
+</script>
+</html>

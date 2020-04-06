@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //1.写出下面输出的答案(阿里面试题)
+    let a = {
+      n: 1
+    }
+
+    let b = a
+    a.x = a = {  //重点是从左到右赋值
+      n: 2
+    }
+    console.log(a.x)
+    console.log(b)
+
+    //2.分别写出下面表达式输出的结果(腾讯面试题)
+    var a = 'abc' + 123 + 456
+    var b = '456' - 123
+    var c = 100 + true + 21.2 + null + undefined + 'Tencent' + [] + null + 9 + false
+    // []转字符串为空串"", {}转为字符串为[object Object]
+    console.log(a, b, c)
+  </script>
+</body>
+</html>

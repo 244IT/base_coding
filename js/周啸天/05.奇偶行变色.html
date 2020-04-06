@@ -39,23 +39,39 @@
 </body>
 <script>
   let liList = document.getElementsByTagName('li')
+  // 方法一 用数组保存原颜色
+  // for(let i = 0; i < liList.length; i++){  
+  //   var color = []
+  //   if(i % 2){
+  //     liList[i].style.backgroundColor = 'lightgreen'
+  //   }
+  //   liList[i].addEventListener('mouseover', function() {
+  //     color[i] = getComputedStyle(this, null).backgroundColor
+  //     this.style.backgroundColor = 'lightpink'
+  //   })
 
+  //   liList[i].addEventListener('mouseout', function() {
+  //     if(color[i]){
+  //       this.style.backgroundColor = color[i]
+  //     }else{
+  //       this.style.backgroundColor = '#fff'
+  //     }
+  //   })
+  // }
+
+  //方法二 用自定义属性保存
   for(let i = 0; i < liList.length; i++){
-    var color = []
-    if(i % 2){
-      liList[i].style.backgroundColor = 'lightgreen'
-    }
+    let bg = i % 2? 'lightgreen':'white' 
+    //初始化样式，及用自定义属性保存原样式
+    liList[i].style.backgroundColor = bg
+    liList[i].originBg = bg
+
     liList[i].addEventListener('mouseover', function() {
-      color[i] = getComputedStyle(this, null).backgroundColor
       this.style.backgroundColor = 'lightpink'
     })
 
     liList[i].addEventListener('mouseout', function() {
-      if(color[i]){
-        this.style.backgroundColor = color[i]
-      }else{
-        this.style.backgroundColor = '#fff'
-      }
+      this.style.backgroundColor = this.originBg
     })
   }
 </script>

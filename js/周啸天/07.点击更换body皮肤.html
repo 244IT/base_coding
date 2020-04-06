@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    html,body{
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+</head>
+<body style="background-color: #fff;">
+  <button id="btn">点击更改body皮肤[白->红->绿->黑->白]</button>
+</body>
+<script>
+  let btn = document.getElementById('btn')
+  let myBody = document.getElementsByTagName('body')[0]
+  let colorList = ["white", "red", "green", "black"]
+  let i = 1
+  myBody.style.backgroundColor = colorList[0]
+  btn.addEventListener('click', function() {
+    if(i === colorList.length){
+      i = 0
+    }
+    myBody.style.backgroundColor = colorList[i];
+    i++
+  })
+
+  // btn.addEventListener('click', function() {
+  //   let currentColor = getComputedStyle(myBody, null).backgroundColor
+  //   if(currentColor === "rgb(255, 255, 255)"){
+  //     myBody.style.backgroundColor = "red"
+  //   }else if(currentColor === "rgb(255, 0, 0)"){
+  //     myBody.style.backgroundColor = "green"
+  //   }else if(currentColor === "rgb(0, 128, 0)"){
+  //     myBody.style.backgroundColor = "black"
+  //   }else if(currentColor === "rgb(0, 0, 0)"){
+  //     myBody.style.backgroundColor = "#fff"
+  //   }
+  // })
+</script>
+</html>
