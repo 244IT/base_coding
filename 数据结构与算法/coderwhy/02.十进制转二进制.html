@@ -8,9 +8,12 @@
 <body>
   <script>
     function toTwo(num) {
+      //1.创建一个数组
       let arr = []
       while(num > 0){
+        //2.将数字取余存入数组
         arr.push(num % 2)
+        //3.记录
         num = Math.floor(num / 2)
       }
       let str = ''

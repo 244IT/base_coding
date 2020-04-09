@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+<script>
+  let arr = ['ming', 'hong', 'rose', 'jack', 'james']
+  function passGame(arr, num) {
+    let queen = []
+    for(let i = 0; i < arr.length; i++){
+      queen.push(arr[i])
+    }
+    while(queen.length > 1){
+      for(let i = 0; i < num-1; i++){
+        queen.push(queen.shift())
+      }
+      queen.shift()
+    }
+    return queen[0]
+  }
+  console.log(passGame(arr, 3))
+</script>
+</html>
