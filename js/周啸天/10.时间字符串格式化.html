@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+</body>
+<script>
+  let time = '2019-10-7 22:21:6'
+  //方案一，利用replace
+  // time = time.replace('-', "年").replace('-', '月').replace(' ', '日').replace(':', '时').replace(':', '分') + '秒'
+  // console.log(time)
+
+  //方案二，利用indexOf
+  let y = time.indexOf('-')
+  let m = time.lastIndexOf('-')
+  let d = time.indexOf(' ')
+  let h = time.indexOf(':')
+  let M = time.lastIndexOf(':')
+  let year = time.substring(0, y)
+  let month = time.substring(y + 1, m)
+  let date = time.substring(m + 1, d)
+  let hours = time.substring(d + 1, h)
+  let minute = time.substring(h + 1, M)
+  let secent = time.substring(M + 1)
+  console.log(year, month, date, hours, minute, secent)
+  //方案三，利用split拆分为数组
+  let arr = time.split(' ')
+  let list1 = arr[0].split('-')
+  let list2 = arr[1].split(':')
+  console.log(list1, list2)
+
+  //方案四，利用正则
+  let arr2 = time.split(/(?: |-|:)/g)
+  console.log(arr2)
+</script>
+</html>

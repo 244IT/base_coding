@@ -11,16 +11,21 @@
 <script>
   let arr = ['ming', 'hong', 'rose', 'jack', 'james']
   function passGame(arr, num) {
+    //1.创建一个队列结构，当然也可以是个数组
     let queen = []
+    //2.遍历传入的数组推进队列结构
     for(let i = 0; i < arr.length; i++){
       queen.push(arr[i])
     }
+    //3.在指定数num之前，依次将队列前的项插入到队列后
     while(queen.length > 1){
       for(let i = 0; i < num-1; i++){
         queen.push(queen.shift())
       }
+      //4.将指定num的项取出
       queen.shift()
     }
+    //5.返回最后剩下的
     return queen[0]
   }
   console.log(passGame(arr, 3))

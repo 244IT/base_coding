@@ -121,6 +121,23 @@
       }
     })(i)
   }
+  //方法五 自定义属性
+  for(var i = 0; i < liList.length; i++){
+    liList[i].onclick = (function(i){
+      return function() {
+        if(this.className === 'active'){
+          return
+        }else{
+          for(var j = 0; j < liList.length; j++) {
+            liList[j].className = ''
+            divList[j].className = ''
+          }
+          liList[i].className = 'active'
+          divList[i].className = 'active'
+        }
+      }
+    })(i)
+  }
 
 </script>
 </html>
