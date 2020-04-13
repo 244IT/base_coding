@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <input type="text" id="inp"/> <button id="btn">验证</button>
+  <div id="showCode"></div>
+</body>
+<script>
+  function createCode() {
+    let str = 'abcdefghijklmnopqrstuvwxyzABCDEFGXYJKLMNOPQRSTUVWXYZ123456789'
+    let codeStr = ''
+    for(let i = 0; i < 4; i++){
+      codeStr += str.charAt(Math.ceil(Math.random()*62))
+    }
+    return codeStr
+  }
+  let showCode = document.getElementById('showCode')
+  let btn = document.getElementById('btn')
+  let inp = document.getElementById('inp')
+
+  showCode.innerHTML = createCode()
+  btn.addEventListener('click', function() {
+    if(inp.value.toLocaleLowerCase()  === showCode.innerHTML.toLocaleLowerCase()){
+      alert('验证成功')
+    }else{
+      alert('验证失败')
+    }
+  })
+</script>
+</html>
