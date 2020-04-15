@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="box">
+    <div id="item">你好啊</div>
+    <ul id="list">
+      <li class="ullist">老师</li>
+      <li class="ullist">同学</li>
+      <li class="ullist">朋友</li>
+      <li class="ullist">亲戚</li>
+      <li class="ullist">狐朋股友</li>
+    </ul>
+  </div>
+</body>
+<script>
+  let box = document.getElementById('box')
+  let ul = document.getElementById('list')
+  console.log(ul.previousSibling)
+  function children(element) {
+    var ele = []
+    for(var i = 0; i < element.childNodes.length; i++){     
+      if(element.childNodes[i].nodeType === 1){
+        ele.push(element.childNodes[i])
+      }
+    }
+    return ele
+  }
+  
+  function prev(element) {
+    var pre = element.previousSibling
+    while(pre.nodeType !== 1){
+      pre = pre.previousSibling
+    }
+    return pre
+  }
+  console.log(prev(ul))
+
+</script>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    p{
+      background-color: lightblue;
+      width: 200px;
+      height: 200px;
+    }
+    .item{
+      float: left;
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <div style="overflow: hidden;">
+      <div class="item active">第1个div</div>
+      <div class="item">第2个div</div>
+      <div class="item">第3个div</div>
+    </div>
+    <p>内容1</p>
+    <p>内容2</p>
+    <p>内容3</p>
+  </div>
+  <script>
+    let item = document.querySelectorAll('.item')
+    for(let i = 0; i < item.length; i++){
+      item[i].setAttribute('data-num', i)
+      item[i].addEventListener('click', function() {
+        
+      })
+    }
+  </script>
+</body>
+</html>
