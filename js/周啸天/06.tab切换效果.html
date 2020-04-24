@@ -122,22 +122,23 @@
     })(i)
   }
   //方法五 自定义属性
-  for(var i = 0; i < liList.length; i++){
-    liList[i].onclick = (function(i){
-      return function() {
-        if(this.className === 'active'){
-          return
-        }else{
-          for(var j = 0; j < liList.length; j++) {
-            liList[j].className = ''
-            divList[j].className = ''
-          }
-          liList[i].className = 'active'
-          divList[i].className = 'active'
-        }
-      }
-    })(i)
+  
+  //保存上次的点击的index
+	let lastIndex = 0
+  for(let i = 0; i < liList.length; i++){
+  	liList[i].index = i
+  	liList[i].addEventListener("click", function() {
+  		//清楚上次index的样式
+  		liList[lastIndex].className = "";
+  		divList[lastIndex].className = '';
+  		//点击index的样式
+  		liList[this.index].className = "active";
+  		divList[this.index].className = 'active';
+  		//保存上次的index
+  		lastIndex = this.index
+  	})
   }
+
 
 </script>
 </html>
