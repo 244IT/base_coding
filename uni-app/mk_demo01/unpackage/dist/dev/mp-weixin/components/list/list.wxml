@@ -1,0 +1,1 @@
+<view><view>{{childTitle}}</view><button data-event-opts="{{[['tap',[['handleClick',['$event']]]]]}}" bindtap="__e">弹出属性值</button></view>
