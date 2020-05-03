@@ -1,6 +1,6 @@
 <template>
 	<view class="content">
-		<view class="todo-header">
+		<view class="todo-header" v-if="list.length!==0">
 			<!-- 状态栏的左侧 -->
 			<view class="header-left">
 				<text class="active-text">全部</text>
@@ -13,7 +13,13 @@
 				<text class="header-right-item">已完成</text>
 			</view>
 		</view>
-		<view class="todo-content" v-for="item in list" :key="index">
+		<!-- 缺省页 -->
+		<view class="default-img" v-if="list.length===0">
+			<view class="show-img">
+				<image src="../../static/default.png"></image>
+			</view>
+		</view>
+		<view class="todo-content" v-for="item in list" :key="index" v-else>
 			<!-- 列表项 -->
 			<view class="todo-list todo-finish">
 				<view class="todo-list-checkbox">
@@ -25,10 +31,10 @@
 		</view>
 		<!-- 创建按钮 -->
 		<view class="create-todo" @click="create">
-			<text class="iconfont icon-jia" :class="{'create-todo-active':textShow}"></text>
+			<text class="iconfont icon-jia"></text>
 		</view>
 		<!-- 输入框 -->
-		<view v-if="active" class="create-content" :class="{'create--show':textShow}">
+		<view  class="create-content" >
 			<view class="create-content-box">
 				<!-- input 输入 -->
 				<view class="create-input">
@@ -47,14 +53,21 @@
 	export default{
 		data() {
 			return{
+				value: '',
 				list: [
-					{
-						content: "test1"
-					},
-					{
-						content: "test2"
-					}
-				]
+					// {
+					// 	content: "test1"
+					// },
+					// {
+					// 	content: "test2"
+					// }
+				],
+				active: false
+			}
+		},
+		methods:{
+			create() {
+				this.active = !this.active
 			}
 		}
 	}

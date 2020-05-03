@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //根据数组中对象的属性进行排序
+
+    let arr = [1, 4, 5 ,2, 45, 12, 16, 11]
+
+    function compare(a, b) {
+      return a - b
+    }
+    
+    arr.sort(compare)
+    console.log(arr)
+
+    let data = [{name: 'xiaomin', age: 16}, {name: 'rose', age: 13}, {name: 'jack', age: 23}]
+
+    function createCompareFunction(value) {
+      return function(obj1, obj2){
+        let value1 = obj1[value]
+        let value2 = obj2[value]
+        return value1 - value2
+      }
+    }
+
+    data.sort(createCompareFunction("age"))
+    console.log(data)
+  </script>
+</body>
+</html>

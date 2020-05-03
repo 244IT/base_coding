@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+    let condition = false;
+    if(condition){
+      function sayHi() {
+        alert("hi")
+      }
+    }else{
+      function sayYo() {
+        alert("yo")
+      }
+    }
+    sayYo()
+
+    let a, b;
+    if(condition) {
+      a = function() {
+        alert('aaa')
+      }
+    }else{
+      b = function() {
+        alert('bbb')
+      }
+    }
+
+  </script>
+</body>
+</html>
