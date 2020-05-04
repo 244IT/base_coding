@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 什么是私有变量？  在函数中定义的就是私有变量。因为在函数外部是不能直接访问函数体内的变量
+    function MyObject() {
+      var privateVariable = 10
+      function privateFuction() {
+        return false
+      }
+      
+      this.publicMethod = function() {
+        privateVariable++;
+        return privateFuction();
+      }
+    }
+    var obj = new MyObject()
+    console.log(obj.publicMethod())
+  </script>
+
+</body>
+</html>

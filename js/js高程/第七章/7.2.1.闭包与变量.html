@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function fun() {
+      var arr = new Array()
+
+      for(var i = 0; i < 10; i++){
+        arr[i] = function() {
+          return i
+        }
+      }
+
+      return arr
+    }
+
+    console.log(fun())
+
+    function fun1() {
+      var arr = new Array()
+
+      for(var i = 0; i < 10; i++){
+        arr[i] = (function(j) {
+          return j
+        })(i)
+      }
+
+      return arr
+    }
+
+    console.log(fun1())
+
+    function fun2() {
+      var arr = new Array()
+
+      for(var i = 0; i < 10; i++){
+        arr[i] = function(num) {  //匿名函数后面可以直接加括号，而函数声明不可以
+          return function() {
+            return num
+          }
+        }(i)   
+      }
+
+      return arr
+    }
+
+    console.log(fun2())
+  </script>
+</body>
+</html>

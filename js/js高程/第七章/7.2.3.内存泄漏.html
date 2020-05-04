@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #box{
+      width: 100px;
+      height: 100px;
+      background-color: lightblue;
+    }
+  </style>
+</head>
+<body>
+  <div id="box"></div>
+  <script>
+
+    //问题， ie9以下使用的是引用计数法，因此下面的函数保存的element变量对象的引用至少为1，所以永远不会被回收
+    function fun() {
+      var element = document.getElementById('box')
+
+      element.onclick = function() {
+        alert(element.id) //函数被调用的时候，其活动对象才被初始化
+      }
+    }
+    fun()
+
+    //解决方法
+    function fun2() {
+      var element = document.getElementById('box')
+      var id = element.id // "box"
+      element.onclick = function() {
+        alert(id)
+      }
+
+      element = null
+    }
+  </script>
+
+</body>
+</html>

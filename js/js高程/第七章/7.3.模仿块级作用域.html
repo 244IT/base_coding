@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+    // 可以在元旦节自动弹出来的提示框
+
+    (function() {
+      var date = new Date()
+      if(date.getMonth() === 0 && date.getDate() === 1){
+        alert('happy day')
+      }
+
+    })()
+  </script>
+
+</body>
+</html>
