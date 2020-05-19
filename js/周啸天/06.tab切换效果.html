@@ -88,7 +88,7 @@
   // }
   //方法三 闭包1
   // for(var i = 0; i < liList.length; i++){
-  //   (function(i){
+  //   (function(i){                            
   //     var index = i
   //     liList[index].addEventListener('click', function() {
   //       if(this.className === 'active'){
@@ -122,7 +122,7 @@
     })(i)
   }
   //方法五 自定义属性
-  
+
   //保存上次的点击的index
 	let lastIndex = 0
   for(let i = 0; i < liList.length; i++){
