@@ -4,21 +4,17 @@
 		<view class="todo-header" v-if="list.length !== 0">
 			<view class="todo-header-left">
 				<text class="active-text">{{text}}</text>
-				<text>{{dateList.length}}</text>
+				<text>{{dateList.length}}条</text>
 			</view>
 			<view class="todo-header-right">
-				<view class="todo-header-right-item" :class="{'active-tab': tabIndex === 1}" @click="tab(1)">全部</view>
-				<view class="todo-header-right-item" :class="{'active-tab': tabIndex === 2}" @click="tab(2)">待办</view>
-				<view class="todo-header-right-item" :class="{'active-tab': tabIndex === 3}" @click="tab(3)">已完成</view>
+				<view class="todo-header-right-item" @click="tab(1)" :class="{'active-tab': tabIndex === 1}">全部</view>
+				<view class="todo-header-right-item" @click="tab(2)" :class="{'active-tab': tabIndex === 2}">待办</view>
+				<view class="todo-header-right-item" @click="tab(3)" :class="{'active-tab': tabIndex === 3}">已完成</view>
 			</view>
 		</view>
 		<!-- 内容列表部分 -->
 		<view class="todo-content" v-if="list.length !== 0">
-			<view class="todo-list" 
-				  v-for="(item, index) in dateList" 
-				  :class="{'todo-finish': item.checked}" 
-				  :key="index" 
-				  @click="finish(item.id)">
+			<view class="todo-list" v-for="(item, index) in dateList" :key="index" @click="finish(item.id)" :class="{'todo-finish': item.checked}">
 				<view class="todo-list_checkbox">
 					<view class="checkbox"></view>
 				</view>
@@ -26,7 +22,7 @@
 			</view>
 		</view>
 		<!-- 缺省页面 -->
-		<view v-else class="default">
+		<view  class="default" v-else>
 			<view class="default-image">
 				<image src="../../static/default.png" mode="aspectFit"></image>
 			</view>
@@ -36,11 +32,11 @@
 			</view>
 		</view>
 		<!-- 创建按钮 -->
-		<view class="create-todo" @click="create" >
-			<view class="iconfont icon-jia" :class="{'create-todo-active': todoShow}"></view>
+		<view class="create-todo" @click="create">
+			<view class="iconfont icon-jia"  :class="{'create-todo-active': textShow}"></view>
 		</view>
 		<!-- 输入框 -->
-		<view class="create-content" v-if="active" :class="{'create-show': todoShow}">
+		<view class="create-content" v-if="active" :class="{'create-show': textShow}">
 			<view class="create-content-box">
 				<!-- input框 -->
 				<view class="create-input">
@@ -61,12 +57,14 @@
 			
 		data() {
 			return {
-				list:[],
+				list: [
+					
+				],
+				value: '',
 				active: false,
-				value: "",
+				textShow: false,
 				tabIndex: 1,
-				text: "全部",
-				todoShow: false
+				text: ''
 			}
 		},
 		computed:{
@@ -74,27 +72,23 @@
 				let list = JSON.parse(JSON.stringify(this.list))
 				let newList = []
 				if(this.tabIndex === 1) {
-					this.text = "全部"
+					this.text = "全部";
 					return list
 				}
-				
 				if(this.tabIndex === 2) {
 					this.text = "待办"
 					list.forEach((item) => {
 						if(!item.checked) {
 							newList.unshift(item)
-							
 						}
 					})
 					return newList
 				}
-				
 				if(this.tabIndex === 3) {
 					this.text = "已完成"
 					list.forEach((item) => {
 						if(item.checked) {
 							newList.unshift(item)
-							
 						}
 					})
 					return newList
@@ -103,38 +97,31 @@
 		},
 		methods:{
 			create() {
-				if(this.active) {
-					this.close()
-				}else{
+				if(!this.active) {
 					this.open()
+				}else{
+					this.close()
 				}
-			},
-			// 开启动画
+			},	
+			// 打开动画
 			open() {
-				this.active = true
+				this.active = true;
 				this.$nextTick(() => {
 					setTimeout(() => {
-						this.todoShow = true;
-					},50)
+						this.textShow = true
+					}, 50)
 				})
 			},
 			// 关闭动画
 			close() {
-				this.todoShow = false
+				this.textShow = false;
 				this.$nextTick(() => {
 					setTimeout(() => {
-						this.active = false;
+						this.active = false
 					}, 350)
 				})
 			},
 			add() {
-				if(this.value === '') {
-					uni.showToast({
-						title: "请输入内容",
-						icon: "none"
-					});
-					return
-				}
 				this.list.unshift({
 					content: this.value,
 					id: new Date().getTime(),
@@ -144,13 +131,9 @@
 				this.close()
 			},
 			finish(id) {
-				console.log("被点击了")
 				console.log(id)
-				this.list.findIndex((item, index) => {
-					if(this.list[index].id === id) {
-						this.list[index].checked = !this.list[index].checked
-					}
-				})
+				let index = this.list.findIndex((item, index) => item.id === id)
+				this.list[index].checked = !this.list[index].checked
 			},
 			tab(index) {
 				this.tabIndex = index
