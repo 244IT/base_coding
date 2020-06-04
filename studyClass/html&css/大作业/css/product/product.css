@@ -1,1 +1,24 @@
+/**
+*@name: product.css
+*@description: 产品中心样式表
+*@author: chh
+*@update:2020-06-04
+*/
+
 @import url("../common/header.css");
+
+.banner{
+  height: 100vh;
+}
+.download{
+  position: absolute;
+  bottom: 130px;
+  left: 138px;
+}
+
+.download li{
+  float: left;
+}
+.download li + li{
+  margin-left: 20px;
+}

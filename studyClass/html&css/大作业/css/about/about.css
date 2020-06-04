@@ -1,3 +1,11 @@
+/**
+*@name: about.css
+*@description: 关于我们样式表
+*@author: chh
+*@update:2020-06-04
+*/
+
+@import url("../common/header.css");
 
 html, body{
   overflow: hidden;
