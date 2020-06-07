@@ -7,3 +7,81 @@
 
 @import url("../common/header.css");
 
+/* 成功就业 */
+.student{
+  position: absolute;
+  top: 50%;
+  left: 50px;
+  right: 50px;
+  margin-top: -200px;
+  color: #FFF;
+}
+.student-wrap{
+  position: relative;
+  width: 1278px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+.student-select{
+  position: absolute;
+  top:0;
+  left: 0;
+  text-align: center;
+  font-size: 18px;
+}
+
+.student-select ul + ul{
+  margin-left: 20px;
+}
+.money-select{
+  width: 174px;
+  background-color: #007DFE;
+  border-radius: 18px;
+}
+
+.money-select li{
+  line-height: 40px;
+  margin: 0 20px;
+  cursor: pointer;
+}
+
+.money-select li + li{
+  border-top: 1px solid rgba(255, 255, 255, .4);
+}
+.money-item{
+  background: url(../../images/success/icon_jiantou.png) no-repeat right;
+
+}
+
+/* 学院列表 */
+.student-list{
+  margin-top: 98px;
+}
+
+.student-item{
+  float: left;
+  width: 300px;
+  height: 160px;
+  padding: 20px;
+  margin-right: 18px;
+  margin-bottom: 18px;
+  font-size: 14px;
+  background-color: rgba(0, 0, 0, .3);
+  border-radius: 12px;
+  box-sizing: border-box;
+}
+
+.student-img{
+  height: 120px;
+  width: 100px;
+}
+.student-img img{
+  width: 100%;
+  height: 100%;
+}
+.student-detail{
+  margin-left: 140px;
+}
+.student-detail li + li{
+  margin-top: 7px;
+}

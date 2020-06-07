@@ -1,3 +1,9 @@
+/**
+*@name: home.css
+*@description: 首页样式
+*@author: chh
+*@update:2020-06-04
+*/
 
 
 @import url("../common/header.css");
@@ -35,14 +41,14 @@
   bottom: 0;
   width: 100%;
   height: 296px;
-  background: url(../../images/mask.png) no-repeat;
+  background: url(../../images/home/mask.png) no-repeat;
   background-size: 100% 100%;
 }
 
 /* 内容部分 */
 .content{
   padding: 80px 40px 0 0;
-  background: url(../../images/pic_background.png) no-repeat;
+  background: url(../../images/home/pic_background.png) no-repeat;
   background-size: 100% 100%;
 }
 /* 内容左侧 */
@@ -177,7 +183,7 @@
   right: 0;
   bottom: 0;
   left: 0;
-  background: url(../../images/icon_play.png) no-repeat center;
+  background: url(../../images/home/icon_play.png) no-repeat center;
 }
 
 /* 企业项目部分 */
@@ -200,14 +206,14 @@
   margin-left: 10px;
 }
 .icon_01{
-  background: url(../../images/icon_Browse.png) no-repeat;
+  background: url(../../images/home/icon_Browse.png) no-repeat;
 }
 .icon_02{
   margin-bottom: -2px;
-  background: url(../../images/icon_Comment.png) no-repeat;
+  background: url(../../images/home/icon_Comment.png) no-repeat;
 }
 .icon_03{
-  background: url(../../images/icon_like.png) no-repeat;
+  background: url(../../images/home/icon_like.png) no-repeat;
 }
 
 .author{
@@ -217,7 +223,7 @@
   display: inline-block;
   width: 24px;
   height: 24px;
-  background: url(../../images/icon_qq.png) no-repeat;
+  background: url(../../images/home/icon_qq.png) no-repeat;
   background-size: contain;
   border-radius: 50%;
   vertical-align: middle;
