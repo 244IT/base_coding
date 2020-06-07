@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #total {
+      width: 450px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    ul {
+      list-style-type: none;
+    }
+
+    li {
+      border-style: solid;
+      border-width: 1px;
+      padding: 5px;
+      margin: 5px;
+      background-color: #99ff99;
+      float: left;
+    }
+
+    .inner {
+      width: 400px;
+      border-style: solid;
+      border-width: 1px;
+      margin: 10px;
+      padding: 10px;
+      float: left;
+    }
+
+    #employeeTable {
+      border-spacing: 1px;
+      background-color: black;
+      margin: 80px auto 10px auto;
+    }
+
+    th,td {
+      background-color: white;
+    }
+
+    #formDiv {
+      width: 250px;
+      border-style: solid;
+      border-width: 1px;
+      margin: 50px auto 10px auto;
+      padding: 10px;
+    }
+
+    #formDiv input {
+      width: 100%;
+    }
+
+    .word {
+      width: 40px;
+    }
+
+    .inp {
+      width: 200px;
+    }
+  </style>
+</head>
+<body>
+  <table id="employeeTable">
+		<tr>
+			<th>Name</th>
+			<th>Email</th>
+			<th>Salary</th>
+			<th>&nbsp;</th>
+		</tr>
+		<tr>
+			<td>Tom</td>
+			<td>tom@tom.com</td>
+			<td>5000</td>
+			<td><a href="javascript:;">Delete</a></td>
+		</tr>
+		<tr>
+			<td>Jerry</td>
+			<td>jerry@sohu.com</td>
+			<td>8000</td>
+			<td><a href="deleteEmp?id=002">Delete</a></td>
+		</tr>
+		<tr>
+			<td>Bob</td>
+			<td>bob@tom.com</td>
+			<td>10000</td>
+			<td><a href="deleteEmp?id=003">Delete</a></td>
+		</tr>
+	</table>
+
+	<div id="formDiv">
+	
+		<h4>添加新员工</h4>
+
+		<table>
+			<tr>
+				<td class="word">name: </td>
+				<td class="inp">
+					<input type="text" name="empName" id="empName" />
+				</td>
+			</tr>
+			<tr>
+				<td class="word">email: </td>
+				<td class="inp">
+					<input type="text" name="email" id="email" />
+				</td>
+			</tr>
+			<tr>
+				<td class="word">salary: </td>
+				<td class="inp">
+					<input type="text" name="salary" id="salary" />
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center">
+					<button id="addEmpButton" value="abc">
+						Submit
+					</button>
+				</td>
+			</tr>
+		</table>
+
+  </div>
+  <script>
+    // 1.删除功能
+    let aList = document.getElementsByTagName("a")
+    for(let i = 0; i < aList.length; i++) {
+      aList[i].onclick = createTr;
+    }
+
+    // 封装函数
+    function createTr() {
+      let tr = this.parentNode.parentNode
+      let name = tr.children[0].innerHTML
+      let warn = confirm("确认要删除"+ name + "吗？")
+      if(warn) {
+        console.log("要删除了")
+        tr.parentNode.removeChild(tr)
+      }
+      return false
+    }
+
+    // 2.添加功能
+    
+
+    addEmpButton.onclick = () => {
+      let name = document.getElementById("empName").value
+      let email = document.getElementById("email").value
+      let salary = document.getElementById("salary").value
+      // console.log(table)
+      if(!name) {
+        alert("请输入姓名")
+        return
+      }else if(!email){
+        alert("请输入邮箱")
+        return
+      }else if(!salary){
+        alert("请输入薪水")
+        return
+      }
+      let tr = document.createElement("tr")
+      tr.innerHTML = '<td>' + name + '</td>' +
+        '<td>' + email + '</td>' +
+        '<td>' + salary + '</td>' +
+        '<td><a href="javascript:;">Delete</a></td>'
+      console.dir(employeeTable)
+      employeeTable.childNodes[1].appendChild(tr)
+      tr.getElementsByTagName("a")[0].onclick = createTr
+    }
+  </script>
+</body>
+</html>

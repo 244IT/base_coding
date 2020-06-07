@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .img-wrap{
+      width: 550px;
+      margin: 60px auto;
+      background-color: burlywood;
+      text-align: center;
+    }
+    .img-wrap img{
+      width: 500px;
+    }
+  </style>
+</head>
+<body>
+  <div class="img-wrap">
+    <p>一共<span id="num01"></span>张图片，当前是第<span id="num02">1</span>张</p>
+    <div>
+      <img src="./img/1.jpg" />
+      <button id="prev">上一张</button>
+      <button id="next">下一张</button>
+    </div>
+  </div>
+  <script>
+    // 1.获取元素
+    let img = document.getElementsByTagName("img")[0]
+    let preImg = document.getElementById("prev")
+    let nextImg = document.getElementById("next")
+
+    // 2.保存图片链接
+    let imgList = ["./img/1.jpg", "./img/2.jpg", "./img/3.jpg", "./img/4.jpg", "./img/5.jpg"]
+    let index = 0
+
+    num01.innerHTML = imgList.length
+
+    // 手动轮播
+    nextImg.addEventListener("click", () => {
+      clearInterval(timer)
+      index++
+      if(index > imgList.length - 1) {
+        index = 0
+      }
+      num02.innerHTML = index + 1
+      img.src = imgList[index]
+      timerFun()
+    })
+
+    preImg.addEventListener("click", () => {
+      clearInterval(timer)
+      index--
+      if(index < 0) {
+        index = imgList.length - 1
+      }
+      num02.innerHTML = index + 1
+      img.src = imgList[index]
+      timerFun()
+    })
+
+    // 自动轮播函数
+    let timer
+    timerFun()
+    function timerFun() {
+      timer = setInterval(() => {
+        index++
+        if(index > 4) {
+          index = 0
+        }
+        num02.innerHTML = index + 1
+        img.src = imgList[index]
+      }, 2000)
+    }
+
+  </script>
+</body>
+</html>
