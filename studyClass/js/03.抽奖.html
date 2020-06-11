@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .content{
+      width: 200px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .smoke-content{
+      
+      width: 100%;
+      line-height: 200px;
+      text-align: center;
+      border: 1px solid #000;
+      border-radius: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="content">
+    <div id="game" class="smoke-content">
+        英雄联盟
+    </div>
+    <div class="btn-content">
+      <input id="start" type="button" value="开始"/>
+      <input id="end" type="button" value="结束">
+    </div>
+  </div>
+</body>
+<script>
+  (function() {
+    // 获取元素
+    let start = document.getElementById("start"),
+      end = document.getElementById("end"),
+      game = document.getElementById("game")
+      arr = ["英雄联盟", "连连看", "跑跑卡丁车", "qq飞车"]
+      timer = null,
+      index = 0
+
+      game.innerHTML = "英雄联盟"
+      start.onclick = () => {
+        console.log(timer)
+        // clearInterval(timer)
+        start.disabled = true
+        timer = setInterval(() => {
+          index ++
+          if(index > arr.length - 1) {
+            index = 0
+          }
+          game.innerHTML = arr[index]
+        }, 100);
+      }
+
+      end.onclick = () => {
+        start.disabled = false
+        clearInterval(timer)
+      }
+  })()
+
+
+</script>
+</html>
