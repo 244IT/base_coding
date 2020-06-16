@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    let arr = [4, 12, 4, 31, 2, 43, 2, 13, 42, 1]
+    let arr1 = [4, 12, 4, 31, 2, 43, 2, 13, 42, 1]
+    let arr2 = [4, 12, 4, 31, 2, 43, 2, 13, 42, 1]
+    let arr3 = [4, 12, 4, 31, 2, 43, 2, 13, 42, 1]
+    let arr4 = [4, 12, 4, 31, 2, 43, 2, 13, 42, 1]
+    // 方法一 indexof/includes
+
+    function rmRepeat01(arr) {
+      let alist = [ ]
+      for(let i = 0; i < arr.length; i++) {
+        if(alist.indexOf(arr[i]) === -1) {
+          alist.push(arr[i])
+        }
+      }
+      return alist
+    }
+    console.log(rmRepeat01(arr))
+
+    function rmRepeat02(arr) {
+      let alist = [ ]
+      for(let i = 0; i < arr.length; i++) {
+        if(!alist.includes(arr[i])) {
+          alist.push(arr[i])
+        }
+      }
+      return alist
+    }
+
+    console.log(rmRepeat02(arr1))
+
+    function rmRepeat03(arr) {
+      for(let i = 0; i < arr.length; i++) {
+        for(let j = i + 1; j < arr.length; j++) {
+          if(arr[i] === arr[j]) {
+            arr.splice(j, 1)
+            j--
+          }
+        }
+      }
+    }
+    rmRepeat03(arr2)
+    console.log(arr2)
+
+    function rmRepeat04(arr) {
+      let obj = {}
+      for(let i = 0; i < arr.length; i++) {
+        let item = arr[i]
+        if(obj[item] !== undefined) {
+          arr.splice(i, 1)
+          i--
+          continue
+        }
+        obj[item] = item
+      }
+      obj = null
+    }
+    rmRepeat04(arr3)
+    console.log(arr3)
+
+    function rmRepeat05(arr) {
+      return arr.filter((item, index) => arr.indexOf(item) === index)
+    }
+
+    console.log(rmRepeat05(arr4))
+
+
+  </script>
+</body>
+</html>

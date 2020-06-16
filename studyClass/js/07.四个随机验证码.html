@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <input id="inp" type="text" placeholder="请输入验证码"/>
+  <span id="code"></span>
+  <button id="btn">登录</button>
+
+  <script>
+    let inp = document.getElementById("inp")
+    let code = document.getElementById("code")
+    let btn = document.getElementById("btn")
+
+    function getCode() {
+      let str1 = "abcdefghijklmnopqrstuvwxyz1234567890"
+      let str2 = ''
+      for(let i = 0; i < 4; i++) {
+        str2 += str1.charAt(Math.random() * str1.length)
+      }
+      return str2
+    }
+
+    code.innerHTML = getCode()
+    code.addEventListener("click", () => {
+      code.innerHTML = getCode()
+    })
+
+    btn.addEventListener("click", () => {
+      if(inp.value.toLowerCase() === code.innerHTML.toLowerCase()) {
+        alert("登录成功")
+      }else {
+        alert("验证码输入有误，请重新输入")
+      }
+    })
+
+  </script>
+</body>
+</html>

@@ -60,8 +60,26 @@
         start.disabled = false
         clearInterval(timer)
       }
-  })()
 
+      console.log('冒泡')
+      let arr1 = [2, 31, 32, 10, 13, 29]
+
+      function bubbleSort(arr) {
+        for(let i = 0; i < arr1.length; i++) {
+          for(let j = i + 1; j < arr1.length; j++) {
+            if(arr1[i] > arr1[j]) {
+              let t = arr1[i]
+              arr1[i] = arr1[j]
+              arr1[j] = t
+            }
+          }
+        }
+        return arr1
+      }
+
+      console.log(bubbleSort(arr1))
+  })()
+  
 
 </script>
 </html>

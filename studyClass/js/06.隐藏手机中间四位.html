@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  
+</head>
+<body>
+  <!-- 结构 -->
+  <div>
+    <input type="number" placeholder="请输入手机号码"/>
+    <button id="btn">转换</button>
+  </div>
+  <div id="showPhone"></input>
+  <script>
+    // 获取数字和按钮元素
+    let number = document.getElementsByTagName("input")[0]
+    let btn = document.getElementById("btn")
+
+    let hideNum = (number) => {
+      let aNum = number.split("")
+      aNum.splice(3, 4, "*", "*", "*", "*")
+      return aNum.join("")
+    }
+
+    btn.addEventListener("click", () => {
+      showPhone.innerHTML = hideNum(number.value)
+    })
+
+
+  </script>
+</body>
+</html>

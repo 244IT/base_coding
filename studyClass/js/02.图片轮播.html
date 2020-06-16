@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    *{
+      padding: 0;
+      margin: 0;
+    }
+    .content{
+      height: 300px;
+      width: 400px;
+      margin: 100px auto;
+      overflow: hidden;
+    }
+
+    ul li{
+      display: none;
+      height: 300px;
+      width: 400px;
+      list-style: none;
+    }
+    img{
+      
+      height: 100%;
+      width: 100%;
+    }
+    .active{
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="content">
+    <ul>
+      <li >
+        <img src="./img/1.jpg"/>
+      </li>
+      <li>
+        <img src="./img/2.jpg"/>
+      </li>
+      <li>
+        <img src="./img/3.jpg"/>
+      </li>
+      <li>
+        <img src="./img/4.jpg"/>
+      </li>
+      <li>
+        <img src="./img/5.jpg"/>
+      </li>
+    </ul>
+  </div>
+  <script>
+    (function() {
+      let imgList = document.getElementsByTagName("li")
+      let index = 0;
+      imgList[index].style.display = "block"
+      setInterval(() => {
+        imgList[index].style.display = "none"
+        index++
+        if(index > imgList.length - 1) {
+          index = 0
+        }
+        imgList[index].style.display = "block"
+      }, 1000)
+    })()
+  </script>
+</body>
+</html>

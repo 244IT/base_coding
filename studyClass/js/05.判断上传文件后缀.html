@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <input id="inp" type="file" value="上传文件"/>
+  <input id="choose" type="button" value="判断文件"/>
+  <script>
+    let inp = document.getElementById("inp")
+    console.dir(inp)
+
+    let choose = document.getElementById("choose")
+
+    choose.onclick = function() {
+      let name = inp.value
+      let index = name.indexOf(".")
+      let end = name.substring(index + 1)
+      if(end !== 'jpg' && end !== "png") {
+        alert("上传文件错误")
+      }else{
+        alert("上传文件正确")
+      }
+    }
+  </script>
+</body>
+</html>
