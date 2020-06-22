@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    *{
+      padding: 0;
+      margin: 0;
+    }
+
+    /* 头部 */
+    .header{
+      background-color: #000;
+      color: #FFF;
+    }
+    .header h2{
+      float: left;
+      padding: 20px 10px;
+    }
+    .header-wrap{
+      width: 900px;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+    .input-content{
+      float: right;
+      padding: 20px 10px;
+    }
+    .input-content input{
+      padding: 3px 8px;
+      border-radius: 5px;
+      vertical-align: middle;
+    }
+
+    [type="button"]{
+      background-color: #fff;
+    }
+
+    /* 内容 */
+    .content{
+      width: 900px;
+      margin: 50px auto 50px;
+      list-style: none;
+    }
+    .list-item{
+      margin: 10px 0;
+      padding: 5px 15px;
+      background-color: #000;
+      border-left: 3px solid orange;
+      border-radius: 8px;
+      color: #fff;
+    }
+
+    .del, .update{
+      float: right;
+      cursor: pointer;
+    }
+    .del{
+      margin-left: 10px;
+    }
+    #listLength{
+      text-align: right;
+    }
+    .length-wrap{
+      text-align: right;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    /* 回到顶部 */
+    #backTop{
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      padding: 15px;
+      font-size: 20px;
+      font-weight: bold;
+      color: #FFF;
+      background-color: #000;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <!-- 头部 -->
+  <div class="header">
+    <div class="header-wrap">
+      <h2>小鹿线</h2>
+      <div class="input-content">
+        <input type="text" id="text"/>
+        <input type="button" value="添加" id="addBtn">
+      </div>
+    </div>
+  </div>
+  <!-- 列表 -->
+  <div class="content" >
+    <!-- 列表长度 -->
+    <div class="length-wrap">
+      <span>当前列表长度: </span><span id="listLength">0</span>
+    </div>
+    <!-- 列表项 -->
+    <ul class="list-content" id="uWrap">
+
+    </ul>
+    <div id="backTop">
+      <span>up</span>
+    </div>
+  </div>
+  <!-- 脚本 -->
+  <script>
+    (function(){
+      // 获取元素 
+      let addBtn = document.getElementById("addBtn")
+      let uWrap = document.getElementById("uWrap")
+      let listLength = document.getElementById("listLength")
+      // 定义长度值、最终长度
+      let index = 0
+      let lastIndex = 0
+
+      /* 1.添加 */
+      addBtn.addEventListener("click", function() {
+        // 获取input元素
+        let text = document.getElementById("text")
+        // 校验表单内容
+        
+        if(!checkText(text.value)) {
+          return
+        }
+        // 校验列表长度
+        if(index === 20) {
+          alert("长度大于20,无法添加!")
+          return
+        }
+
+        let value = checkText(text.value)
+        // 添加列表项
+        createItem(value, lastIndex)
+
+        // 计数增加
+        index ++
+        lastIndex ++
+        listLength.innerHTML = index
+      })
+
+      /* 创建列表项 */
+      function createItem(value, index) {
+        // 创建li
+        let li = document.createElement("li")
+        // 添加需要的类名
+        li.className = "list-item"
+        // 添加自定义索引
+        li.index = index
+        // 添加内容
+        li.innerHTML = '<span >'+ (li.index + 1) + '.' + value + '</span><a class="del">删除</a><a class="update">修改</a>'
+
+        // 添加a标签删除、修改事件
+        let aUpdate = li.getElementsByTagName("a")[1]
+        let aDel = li.getElementsByTagName("a")[0]
+        aUpdate.addEventListener("click", updateItem)
+        aDel.addEventListener("click", delItem)
+
+        // 在ul容器插入li列表项
+        uWrap.appendChild(li)
+        // text.value = ''
+      }
+
+
+       /* 2.删除函数 */
+      function delItem() {
+        let isDel = confirm("确认要删除吗？")
+        if(isDel) {
+          let li = this.parentNode
+          uWrap.removeChild(li)
+
+          // 计数减少
+          index --
+          listLength.innerHTML = index
+        }
+        
+        // 阻止默认事件
+        return false
+      }
+
+      /* 3.修改函数 */
+      function updateItem() {
+        let newValue = prompt("请输入新的内容")
+        if(!checkText(newValue)) {
+          return
+        }
+        let li = this.parentNode
+        let span = li.getElementsByTagName("span")[0]
+        span.innerHTML = (li.index + 1) + '.' + newValue
+      }
+
+      /* 4.表单校验函数 */
+      function checkText(value) {
+        if(!value) {
+          alert("请输入内容")
+          return false
+        }
+        return value.trim()
+      }
+
+      
+      let backTopBtn = document.getElementById("backTop")
+      backTopBtn.addEventListener("click", function() {
+        backTop(20)
+      })
+
+      /* 5.回到顶部函数 */
+      function backTop(spe) {
+        let speed = spe
+        let htmlNode = document.documentElement
+        let scrollTop = htmlNode.scrollTop
+        let timer 
+        timer = setInterval(function() {
+          scrollTop -= speed
+          if(scrollTop < 0) {
+            scrollTop = 0
+            clearInterval(timer)
+          }
+          htmlNode.scrollTop = scrollTop
+        }, 20)
+      }
+    })()
+  </script>
+</body>
+</html>

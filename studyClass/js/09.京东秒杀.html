@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box{
+      
+      color: #FFF;
+      font-weight: bold;
+      background-color: #000;
+    }
+  </style>
+</head>
+<body>
+  <div id="box">12:00:00</div>
+  <script>
+
+    (function() {
+
+      getTime("00:11:10")
+
+    })()
+    // 12:00:00
+    function getTime(time) {
+      box.innerHTML = time
+      let second = time.split(":")[2]
+      let minutes = time.split(":")[1]
+      let hours = time.split(":")[0]
+      let end = false
+      console.log(second)
+      let timer = setInterval(() => {
+        if(second > 0) {
+          second--
+        }else if(second == 0) {
+          if(minutes > 0) {
+            minutes--
+          }else if(minutes == 0){
+            if(hours > 0) {
+              hours--
+              if(hours == 0) {
+                minutes = 59
+              }
+            }else if(hours == 0){   
+              clearInterval(timer)       
+              alert("游戏结束")
+              return          
+            }
+           
+          }
+          second = 59
+        }
+        box.innerHTML = `${hours<10&&hours.length!==2?'0'+hours : hours}:${minutes<10&&minutes.length!==2?'0'+minutes:minutes}:${second<10&&second.length!==2?'0'+second:second}`
+      }, 10)  
+    }
+  </script>
+</body>
+</html>
