@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #box{
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      background-color: orange;
+
+    }
+  </style>
+</head>
+<body>
+  <div id="box"></div>
+
+  <script>
+    let box = document.getElementById("box")
+    let x 
+    let y
+    function boxMove(e) {
+      box.style.left = e.clientX - x + "px"
+      box.style.top = e.clientY - y + "px"
+    }
+ 
+    box.addEventListener("mousedown", function(e) {
+      x = e.clientX - box.offsetLeft
+      y = e.clientY - box.offsetTop
+      document.addEventListener("mousemove", boxMove)
+    })
+
+    box.addEventListener("mouseup", function() {
+      console.log("松开了")
+      
+      document.removeEventListener("mousemove", boxMove)
+    })
+
+    // box.onmouseup = function() {
+    //   console.log("松开了")
+    //   document.onmousemove = null
+    // }
+  </script>
+</body>
+</html>

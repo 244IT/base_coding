@@ -71,6 +71,7 @@
 
     /* 回到顶部 */
     #backTop{
+      display: none;
       position: fixed;
       bottom: 30px;
       right: 30px;
@@ -91,6 +92,7 @@
       <div class="input-content">
         <input type="text" id="text"/>
         <input type="button" value="添加" id="addBtn">
+        <input type="button" value="搜索" id="searchBtn">
       </div>
     </div>
   </div>
@@ -119,8 +121,21 @@
       let index = 0
       let lastIndex = 0
 
+      // 保存文章信息
+      let textList = []
+
+
       /* 1.添加 */
-      addBtn.addEventListener("click", function() {
+      addBtn.addEventListener("click", addItem)
+
+      // keydown添加
+      document.addEventListener("keydown", function(e) {
+       if(e.keyCode === 13) {
+        addItem()
+       }
+      })
+      // 添加函数
+      function addItem() {
         // 获取input元素
         let text = document.getElementById("text")
         // 校验表单内容
@@ -138,20 +153,22 @@
         // 添加列表项
         createItem(value, lastIndex)
 
+        // 加入数组，用于搜索
+        textList.push({value: value, lastIndex: lastIndex})
+
         // 计数增加
         index ++
         lastIndex ++
         listLength.innerHTML = index
-      })
-
+      }
       /* 创建列表项 */
-      function createItem(value, index) {
+      function createItem(value, lastIndex) {
         // 创建li
         let li = document.createElement("li")
         // 添加需要的类名
         li.className = "list-item"
         // 添加自定义索引
-        li.index = index
+        li.index = lastIndex
         // 添加内容
         li.innerHTML = '<span >'+ (li.index + 1) + '.' + value + '</span><a class="del">删除</a><a class="update">修改</a>'
 
@@ -189,7 +206,11 @@
         if(!checkText(newValue)) {
           return
         }
+        // 修改搜索数组内的值
         let li = this.parentNode
+        textList.splice(li.index, 1, {value: newValue, lastIndex: li.index})
+        console.log("新数组")
+        console.log(textList)
         let span = li.getElementsByTagName("span")[0]
         span.innerHTML = (li.index + 1) + '.' + newValue
       }
@@ -203,13 +224,25 @@
         return value.trim()
       }
 
-      
+      /* 5.回到顶部功能 */
+           
       let backTopBtn = document.getElementById("backTop")
       backTopBtn.addEventListener("click", function() {
         backTop(20)
       })
 
-      /* 5.回到顶部函数 */
+      // 控制up按钮显示隐藏
+      document.addEventListener("scroll", function() {
+        let htmlNode = document.documentElement
+        console.log(html.scrollTop)
+        if (htmlNode.scrollTop > 100) {
+          backTopBtn.style.display = "block"
+        } else {
+          backTopBtn.style.display = "none"
+        }
+      })
+
+      // 回到顶部函数 
       function backTop(spe) {
         let speed = spe
         let htmlNode = document.documentElement
@@ -224,6 +257,43 @@
           htmlNode.scrollTop = scrollTop
         }, 20)
       }
+
+      /* 6.搜索功能 */
+      let searchBtn = document.getElementById("searchBtn")
+      searchBtn.addEventListener("click", function() {
+        // 获取搜索关键字
+        let text = document.getElementById("text")
+        // 开始搜索, 无关键字则搜索全部
+        if(text.value.trim() === "" ) {
+          searchList(textList)
+        }else{
+          searchList(textList, text.value)
+        }
+      })
+      
+      // 搜索函数
+      function searchList(list, value) {
+        console.log(list, value)
+        // 清空列表项
+        uWrap.innerHTML = ""
+        // 遍历list， 根据搜索插入
+        let len = list.length
+
+        if(arguments.length === 1) {
+          for(let i = 0; i < len; i++) {
+            createItem(list[i].value, list[i].lastIndex)
+          }
+        }else{
+          for(let i = 0; i < len; i++) {
+            if(list[i].value === value) {
+              console.log(value)
+              createItem(list[i].value, list[i].lastIndex)
+            }
+          }
+        }
+        
+      }
+
     })()
   </script>
 </body>
