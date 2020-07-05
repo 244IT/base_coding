@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+    }
+
+    .item{
+      width: 100px;
+      height: 100px;
+      background-color: pink;
+      font-size: 30px;
+      text-align: center;
+      line-height: 100px;
+      overflow: hidden;
+    }
+
+    a{
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="item">itemitemitemitemitemitemitemitemitemitemitemitemitemitemitemitem</div>
+  <a href="http://www.baidu.com">跳转百度</a>
+  <script>
+    let item = document.getElementsByClassName("item")[0]
+    // document.body.addEventListener("touchstart", function(ev) {
+    //   ev = ev || event
+    //   ev.preventDefault()
+    // })
+
+    let a = document.getElementsByTagName("a")[0]
+    a.addEventListener("click", function() {
+      console.log("点击了")
+    })
+    a.addEventListener("touchstart", function() {
+      console.log("触摸屏幕")
+    })
+    a.addEventListener("touchmove", function() {
+      console.log("移动触摸")
+    })
+    a.addEventListener("touchend", function() {
+      console.log("离开屏幕")
+    })
+    
+  </script>
+</body>
+</html>
