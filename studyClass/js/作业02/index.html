@@ -88,7 +88,7 @@
   <!-- 头部 -->
   <div class="header">
     <div class="header-wrap">
-      <h2>小鹿线</h2>
+      <h2>js增删改查</h2>
       <div class="input-content">
         <input type="text" id="text"/>
         <input type="button" value="添加" id="addBtn">
@@ -112,7 +112,7 @@
   </div>
   <!-- 脚本 -->
   <script>
-    (function(){
+    ;(function(){
       // 获取元素 
       let addBtn = document.getElementById("addBtn")
       let uWrap = document.getElementById("uWrap")
@@ -124,7 +124,6 @@
       // 保存文章信息
       let textList = []
 
-
       /* 1.添加 */
       addBtn.addEventListener("click", addItem)
 
@@ -134,6 +133,7 @@
         addItem()
        }
       })
+
       // 添加函数
       function addItem() {
         // 获取input元素
@@ -161,6 +161,7 @@
         lastIndex ++
         listLength.innerHTML = index
       }
+
       /* 创建列表项 */
       function createItem(value, lastIndex) {
         // 创建li
@@ -172,11 +173,11 @@
         // 添加内容
         li.innerHTML = '<span >'+ (li.index + 1) + '.' + value + '</span><a class="del">删除</a><a class="update">修改</a>'
 
-        // 添加a标签删除、修改事件
-        let aUpdate = li.getElementsByTagName("a")[1]
-        let aDel = li.getElementsByTagName("a")[0]
-        aUpdate.addEventListener("click", updateItem)
-        aDel.addEventListener("click", delItem)
+        // 添加a标签删除、修改事件, 不使用事件委托, 则通过这种方式一一为新创建的li添加删除和修改事件
+        // let aUpdate = li.getElementsByTagName("a")[1]
+        // let aDel = li.getElementsByTagName("a")[0]
+        // aUpdate.addEventListener("click", updateItem)
+        // aDel.addEventListener("click", delItem)
 
         // 在ul容器插入li列表项
         uWrap.appendChild(li)
@@ -184,35 +185,52 @@
       }
 
 
-       /* 2.删除函数 */
-      function delItem() {
-        let isDel = confirm("确认要删除吗？")
-        if(isDel) {
-          let li = this.parentNode
-          uWrap.removeChild(li)
+       /* 2.删除功能 */
 
-          // 计数减少
-          index --
-          listLength.innerHTML = index
+      //删除事件委托给ul，函数内部用e.target区分
+      uWrap.addEventListener("click", delItem)
+
+      function delItem(e) {
+        // 委托事件函数内的this指向ul，所以应该都用e.target指向点击对象
+        if(e.target.className === "del") {
+          let isDel = confirm("确认要删除吗？")
+          if(isDel) {
+            let li = e.target.parentNode
+            uWrap.removeChild(li)
+
+            // 计数减少
+            index --
+            listLength.innerHTML = index
+          }
+          
+          // 阻止默认事件
+          return false
         }
-        
-        // 阻止默认事件
-        return false
       }
 
-      /* 3.修改函数 */
-      function updateItem() {
-        let newValue = prompt("请输入新的内容")
-        if(!checkText(newValue)) {
-          return
+      /* 3.修改功能 */
+
+      //修改事件委托给ul，函数内部用e.target区分
+      uWrap.addEventListener("click", updateItem)
+
+      function updateItem(e) {
+        if(e.target.className === "update") {
+          let newValue = prompt("请输入新的内容")
+          // 点击取消
+          if(Object.prototype.toString.call(newValue).slice(8, -1) === 'Null') {
+            return
+          }
+          if(!checkText(newValue)) {
+            return
+          }
+          // 修改搜索数组内的值
+          let li = e.target.parentNode
+          textList.splice(li.index, 1, {value: newValue, lastIndex: li.index})
+          console.log("新数组")
+          console.log(textList)
+          let span = li.getElementsByTagName("span")[0]
+          span.innerHTML = (li.index + 1) + '.' + newValue
         }
-        // 修改搜索数组内的值
-        let li = this.parentNode
-        textList.splice(li.index, 1, {value: newValue, lastIndex: li.index})
-        console.log("新数组")
-        console.log(textList)
-        let span = li.getElementsByTagName("span")[0]
-        span.innerHTML = (li.index + 1) + '.' + newValue
       }
 
       /* 4.表单校验函数 */
@@ -234,7 +252,6 @@
       // 控制up按钮显示隐藏
       document.addEventListener("scroll", function() {
         let htmlNode = document.documentElement
-        console.log(html.scrollTop)
         if (htmlNode.scrollTop > 100) {
           backTopBtn.style.display = "block"
         } else {
@@ -285,13 +302,12 @@
           }
         }else{
           for(let i = 0; i < len; i++) {
-            if(list[i].value === value) {
+            if(list[i].value.indexOf(value) > -1) {
               console.log(value)
               createItem(list[i].value, list[i].lastIndex)
             }
           }
-        }
-        
+        } 
       }
 
     })()
