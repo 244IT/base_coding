@@ -46,8 +46,8 @@
     }
     .l-img img{
       position: absolute;
-      height: 1600px;
-      width: 1600px;
+      height: 800px;
+      width: 800px;
     }
 
 
@@ -77,13 +77,13 @@
       let lImg = document.getElementsByClassName("l-img")[0]
       smallImg.addEventListener("mouseover", function(e) {
         // 显示大图和阴影
-        // shadow.style.display = "block"
-        // lImg.style.display = "block"
+        shadow.style.display = "block"
+        lImg.style.display = "block"
       })
       // 鼠标移入小图
       smallImg.addEventListener("mousemove", function(e) {
         // 注销移出事件
-        smallImg.removeEventListener("mouseout", hideImg)
+        // smallImg.removeEventListener("mouseout", hideImg)
 
         // 显示大图和阴影
         shadow.style.display = "block"

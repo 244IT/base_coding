@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    *{
+      padding: 0;
+      margin: 0;
+    }
+
+    body,html{
+      height: 100%;
+      overflow: hidden;
+    }
+    .wrap{
+      height: 100%;
+    }
+    .carousel-wrap ul{
+      position: absolute;
+      overflow: hidden;
+      list-style: none;
+    }
+    .carousel-wrap ul > li{
+      float: left;
+    }
+    .carousel-wrap .list li a, .carousel-wrap .list li a img{
+      width: 100%;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="carousel-wrap">
+    </div>
+  </div>
+
+  <script>
+    // 移动端阻止默认事件
+    document.body.addEventListener("touchstart", function(ev) {
+      ev = ev || event
+      // ev.preventDefault()
+    })
+
+    let arr = ['img/1.jpg', 'img/2.jpg', 'img/3.jpg', 'img/4.jpg', 'img/5.jpg']
+    carousel(arr)
+    function carousel(arr) {
+      let carouselWrap = document.querySelector(".carousel-wrap")
+      /* 布局 */
+      if(carouselWrap) {
+        let ulNode = document.createElement("ul")
+        let styleNode = document.createElement("style")
+        for(let i = 0; i < arr.length; i++) {
+          ulNode.innerHTML += '<li><a><img src="' + arr[i] + '"/></a></li>'
+        }
+        ulNode.classList.add("list")
+        styleNode.innerHTML = '.carousel-wrap ul > li{width: ' + (1 / arr.length * 100) + '%;}.carousel-wrap ul{ width: ' + arr.length + '00%;}'
+        carouselWrap.appendChild(ulNode)
+        document.head.appendChild(styleNode)
+
+        let imgNode = document.querySelector(".carousel-wrap .list li a img")
+        
+        setTimeout(function() {
+          carouselWrap.style.height = imgNode.offsetHeight + 'px'
+        }, 200)
+
+        /* 逻辑 */
+
+        // 手指位置
+        let startX = 0
+        // 元素位置
+        let elementX = 0
+
+        
+      }
+    }
+  </script>
+</body>
+</html>

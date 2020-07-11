@@ -4,24 +4,28 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <style>
+    #inp{
+      background-color: lightblue;
+    }
+  </style>
 </head>
 <body>
+  <input id="inp" type="text"/>
+  <input id="inp" type="text"/>
   <script>
-    function Vue(option) {
-      return option
-    }
+    
+    let input = document.getElementById("inp")
 
-    let vm = new Vue({
-      el: "#app",
-      data() {
-        return {
-          msg: "xiaohu"
-        }
-      }
+    input.addEventListener("input", function() {
+      console.log("input")
     })
 
-    console.log(vm)
- 
+    input.addEventListener("change", function() {
+      console.log("change")
+    })
   </script>
+
+  
 </body>
 </html>
