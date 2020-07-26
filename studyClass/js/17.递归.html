@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div>
+
+    <div id="main"></div>
+  </div>
+
+  <script>
+
+    function getTotal(num) {
+      if(num === 1) {
+        return 1
+      }else {
+        return num + getTotal(num - 1)
+      }
+    }
+
+    console.log(getTotal(10))
+
+
+    function getArr(arr) {
+      let result = []
+      for(let i = 0; i < arr.length; i++) {
+        if(typeof arr[i] === 'object') {
+          result = result.concat(getArr(arr[i]) )
+        }else {
+          result.push(arr[i])
+        }
+      }
+      return result
+    }
+
+    let arr = [1, 3, 4, [11, 33], [11, 3, [1, 32, 4], 5]]
+    console.log(getArr(arr))
+
+    let arr2 = []
+    function domTree(dom) {
+      let node = dom.parentNode
+      if(node) {
+        arr2.push(dom)
+        domTree(node)
+      }
+    }
+    let dom = document.getElementById("main")
+    domTree(dom)
+    console.log(arr2)
+
+    function getSum(n) {
+      if(n <= 2) {
+        return 1
+      }
+      return getSum(n - 2) + getSum(n - 1)
+    }
+
+    
+    console.log(getSum(7))
+  </script>
+</body>
+</html>

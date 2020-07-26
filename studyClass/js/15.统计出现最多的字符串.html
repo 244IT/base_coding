@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    let str = "aadddggewedgaaabbbggggggg"
+
+    // 使用对象的方式
+    function mostNum(str) {
+      let obj = {}
+      for(let i = 0; i < str.length; i++){
+        let value = str[i]
+        if(obj[value] !== undefined) {
+          obj[value].count++
+          continue
+        }
+        obj[value] = {count: 1}
+      }
+      let arr = []
+      for(let i in obj) {
+        arr.push(obj[i].count)
+      }
+      arr.sort((a, b) => a - b)
+      // 取结果
+      for(let i in obj) {
+        if(obj[i].count === arr[arr.length - 1]) {
+          return {name: i, count: obj[i].count}
+        }
+      }
+    }
+
+    // 使用正则的方式
+    function mostNum2(str) {
+      let index = 0
+      let value = ''
+      let newStr = str.split("").sort().join("")
+      // 判断
+      newStr.replace(/(\w)\1+/g, function(val, item) {
+        console.log(val, item)
+        if(index < val.length) {
+          index = val.length
+          value = item
+        }
+      })
+      console.log(value, index)
+    }
+    // console.log("出现最多的字符串是" + mostNum(str).name  + ", 它的数量是" + mostNum(str).count)
+    mostNum2(str)
+  </script>
+</body>
+</html>
