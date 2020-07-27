@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+
+    *{
+      padding: 0;
+      margin: 0;
+    }
+    #container{
+      position: relative;
+      width: 1300px;
+      margin: 0 auto;
+    }
+
+    .clearfix::after{
+      content: " ";
+      display: block;
+      clear: both;
+    }
+    .item{
+      float: left;
+      padding: 10px;
+      
+    }
+    .item .pic{
+      padding: 10px;
+      border-radius: 10px;
+      box-shadow: 0 0 5px 2px rgba(0, 0, 0, .3);
+    }
+    .pic img{
+      width: 230px;
+      height: auto;
+    }
+
+  </style>
+</head>
+<body>
+  <!-- 结构 -->
+  <div id="container" class="clearfix">
+    <div class="item">
+      <div class="pic">
+        <img src="./img/flow/1.jpg"/>
+      </div>
+    </div>
+    <div class="item">
+      <div class="pic">
+        <img src="./img/flow/2.jpg"/>
+      </div>
+    </div>
+    <div class="item">
+      <div class="pic">
+        <img src="./img/flow/3.jpg"/>
+      </div>
+    </div>
+    <div class="item">
+      <div class="pic">
+        <img src="./img/flow/4.jpg"/>
+      </div>
+    </div>
+    <div class="item">
+      <div class="pic">
+        <img src="./img/flow/5.jpg"/>
+      </div>
+    </div>
+    <div class="item">
+      <div class="pic">
+        <img src="./img/flow/6.jpg"/>
+      </div>
+    </div>
+    <div class="item">
+      <div class="pic">
+        <img src="./img/flow/7.jpg"/>
+      </div>
+    </div>
+    <div class="item">
+      <div class="pic">
+        <img src="./img/flow/8.jpg"/>
+      </div>
+    </div>
+    <div class="item">
+      <div class="pic">
+        <img src="./img/flow/9.jpg"/>
+      </div>
+    </div>
+    <div class="item">
+      <div class="pic">
+        <img src="./img/flow/10.jpg"/>
+      </div>
+    </div>
+    <div class="item">
+      <div class="pic">
+        <img src="./img/flow/1.jpg"/>
+      </div>
+    </div>
+    <div class="item">
+      <div class="pic">
+        <img src="./img/flow/2.jpg"/>
+      </div>
+    </div>
+    <div class="item">
+      <div class="pic">
+        <img src="./img/flow/3.jpg"/>
+      </div>
+    </div>
+    <div class="item">
+      <div class="pic">
+        <img src="./img/flow/4.jpg"/>
+      </div>
+    </div>
+    <div class="item">
+      <div class="pic">
+        <img src="./img/flow/5.jpg"/>
+      </div>
+    </div>
+    <div class="item">
+      <div class="pic">
+        <img src="./img/flow/6.jpg"/>
+      </div>
+    </div>
+    <div class="item">
+      <div class="pic">
+        <img src="./img/flow/7.jpg"/>
+      </div>
+    </div>
+    <div class="item">
+      <div class="pic">
+        <img src="./img/flow/8.jpg"/>
+      </div>
+    </div>
+    <div class="item">
+      <div class="pic">
+        <img src="./img/flow/9.jpg"/>
+      </div>
+    </div>
+    <div class="item">
+      <div class="pic">
+        <img src="./img/flow/10.jpg"/>
+      </div>
+    </div>
+  </div>
+  <!-- 脚本 -->
+  <script>
+    window.onload = function() {
+      // 摆放盒子
+      putBox()
+
+      // 滚动加载
+      window.onscroll = scrollLoad
+    }
+
+    // 盒子合理摆放的函数
+    function putBox() {
+      let htmlWidth = document.documentElement.clientWidth
+      let container = document.getElementById("container")
+      let items = document.getElementsByClassName("item")
+
+      let num  = Math.floor(htmlWidth / items[0].offsetWidth)
+      let itemWidth = items[0].offsetWidth
+      container.style.width = itemWidth * num + 'px'
+      
+      // 计算下层盒子top
+      let arr = []
+      for(let i = 0; i < items.length; i++) {
+        if(i < num) {
+          arr.push(items[i].offsetHeight)
+          
+        }else {
+          // 得到数组最小值
+          let minHeight = Math.min(...arr)
+          // 得到最小值索引
+          let minIndex = getIndex(arr, minHeight)
+          items[i].style.position = "absolute"
+          items[i].style.top = minHeight + 'px'
+          items[i].style.left = itemWidth * minIndex + 'px'
+          // 更新最小值
+          arr[minIndex] += items[i].offsetHeight
+        }
+      }
+    }
+
+    // 得到最小值索引
+    let getIndex = (arr, minHeight) => arr.findIndex((item) => item === minHeight)
+
+    // 滚动加载函数
+    let scrollLoad = () => {
+      if(isToButtom()) {
+        // 创建列表项元素
+        let container = document.getElementById("container")
+        let item = document.createElement("div")
+        let pic = document.createElement("div")
+        let img = document.createElement("img")
+        // 设置类名
+        item.className = "item"
+        pic.className = 'pic'    
+        img.src = './img/flow/12.jpg'
+        // 插入元素
+        container.appendChild(item)
+        item.appendChild(pic)
+        pic.appendChild(img)
+        // 计算新元素位置
+        putBox()
+      }
+    }
+
+    // 判断是否快滚动到底
+    let isToButtom = () => {
+      let clientHeight = document.documentElement.clientHeight
+      let scrollTop = document.documentElement.scrollTop
+      let items = document.getElementsByClassName("item")
+      // 获取最后一个元素
+      let lastItem = items[items.length - 1]
+      return lastItem.offsetTop < scrollTop + clientHeight ? true : false
+    }
+
+    
+  </script>
+</body>
+</html>
