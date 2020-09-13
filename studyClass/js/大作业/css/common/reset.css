@@ -1,0 +1,38 @@
+/**
+*@name: reset.css
+*@description: 格式化样式
+*@author: chh
+*@update:2020-06-04
+*/
+
+
+*{
+  padding: 0;
+  margin: 0;
+}
+body, html{
+  background: #272729;
+}
+
+ul{
+ list-style: none;
+}
+
+.clearfix::after{
+  display: block;
+  content: "";
+  clear: both;
+}
+
+a{
+  text-decoration: none;
+  color: #FFF;
+}
+
+.fl{
+  float: left;
+}
+
+.fr{
+  float: right;
+}

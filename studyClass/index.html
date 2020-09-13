@@ -4,36 +4,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <style>
-    #inp{
-      background-color: lightblue;
-    }
-  </style>
 </head>
 <body>
-  <input id="inp" type="text"/>
-  <input id="inp" type="text"/>
   <script>
-    
-    console.log(a);    
+    function test(arg) {
+	    this.x = arg;
+	    return this;
+    } 
 
-			var a=1;   
-
-			console.log(a);   
-
-			function a(){alert(2)}
-
-			console.log(a);      
-
-			var a=3;
-
-			console.log(a);     
-
-			function a(){alert(3)}
-
-			console.log(a); 
+    var x = test(5);
+    var y = test(6);
+    console.log(x) 
+    console.log(y)
+    console.log(x.x);
+    console.log(y.x); 
   </script>
-
-  
 </body>
 </html>

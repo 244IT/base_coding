@@ -1,0 +1,59 @@
+/**
+*@name: about.css
+*@description: 关于我们样式表
+*@author: chh
+*@update:2020-06-04
+*/
+
+@import url("../common/header.css");
+
+html, body{
+}
+
+/* 讲师内容 */
+.lecture{
+  position: absolute;
+  top: 80px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto 50px;
+  height: 500px;
+}
+
+.lecture-item{
+  padding: 40px 62px;
+  background: url(../../images/about/pic_balckbc.png) no-repeat;
+  background-size: 100% 100%;
+  /* border-radius: 40px; */
+}
+.lecture-img{
+  height: 160px;
+  width: 140px;
+}
+.lecture-img img{
+  height: 100%;
+  width: 100%;
+}
+
+.lecture-txt{
+  margin-left: 200px;
+  color: #FFF;
+}
+
+.lecture-txt h2{ 
+  font-size: 30px;
+}
+
+.status{
+  margin: 16px 0 20px;
+  color: #FFE128;
+  font-size: 18px;
+}
+.status + p{
+  font-size: 16px;
+}
+
+.lecture-item + .lecture-item{
+  margin-bottom: 22px;
+} 
